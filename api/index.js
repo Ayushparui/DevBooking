@@ -6,14 +6,19 @@ import userRoute from "./routes/users.js"
 import hotelsRoute from "./routes/hotels.js"
 import roomsRoute from "./routes/rooms.js"
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
 const app = express()
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json({ limit: "10mb" }))
+
 //Middleware
 app.use(cookieParser())
-app.use(express.json())
-const PORT = 3000;
+// app.use(express.json())
+const PORT = process.env.PORT || 5500;
 
 //Database Connection
 const connect = async () =>{
